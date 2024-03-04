@@ -1,7 +1,11 @@
 # read letter-grid from png
 # -> datastructure to represent the grid
-sq = [[('I', True), ('F', True)],
-      [('N', True), ('D', True)]]
+# sq = [[('I', True), ('F', True)],
+#       [('N', True), ('D', True)]]
+
+sq = [[('H', True), ('I', True), ('B', True)],
+       [('N', True), ('R', True), ('E', True)],
+       [('A', True), ('T', True), ('E', True)]]
 
 # cut picture
 # recognize letter
@@ -45,7 +49,7 @@ def find_words(position, letters_so_far):
 
 letters_so_far = []
 words_so_far = []
-print(words_so_far)
+#print(words_so_far)
 def turn_letters_into_words(letters_so_far):
     word = ""
     for letter in letters_so_far:
@@ -101,17 +105,23 @@ class Trie:
                     valid_words.add(words_so_far[i : j + 1])
         return valid_words
 
-#test = Trie()
-#for word in the_dictionary_to_rule_them_all:
-#    test.add_to_trie(word)
+    def exists_in_trie(self, word):
+        current = self.root
+        for letter in word:
+            if letter not in current:
+                return False
+            current = current[letter]
+        return self.end_symbol in current
 
-#print(test.find_valid_words(words_so_far))
+test = Trie()
+for word in the_dictionary_to_rule_them_all:
+   test.add_to_trie(word)
 
-#def valid_word(words_so_far):
-#    finds = []
-#    for word in words_so_far:
-#        if word in f:
-#            finds.append(word)
-#    return finds
+def valid_word(words_so_far):
+   finds = []
+   for word in words_so_far:
+       if test.exists_in_trie(word) == True:
+           finds.append(word)
+   return finds
 
-#print(valid_word(words_so_far))
+print(valid_word(words_so_far))
