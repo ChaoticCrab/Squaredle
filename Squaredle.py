@@ -29,14 +29,10 @@ def valid_step(position, coordinates):
     column_step_length = abs(coordinates[1] - position[1])
     step = (row_step_length, column_step_length)
     return on_board(coordinates) and step[0] <= 1 and step[1] <= 1
-
-# word_List["fi","if"]
 def find_words(position, letters_so_far):
     turn_letters_into_words(letters_so_far)
     for row_number, row in enumerate(sq):
-        # row_number = 0 / row = [('I',True),('F',True)]
         for column_number, letter in enumerate(row):
-            # column_number = 0, letter = ('I',True)
             coordinates = (row_number, column_number)
             if not letter[1] or not valid_step(position, coordinates):
                 continue
@@ -49,7 +45,6 @@ def find_words(position, letters_so_far):
 
 letters_so_far = []
 words_so_far = []
-#print(words_so_far)
 def turn_letters_into_words(letters_so_far):
     word = ""
     for letter in letters_so_far:
@@ -57,8 +52,6 @@ def turn_letters_into_words(letters_so_far):
         word += char
     if len(word) >= 4:
         words_so_far.append(word.lower())
-
-# turn_letters_into_words(['f','o','x',"y"])
 
 find_words((0, 0), letters_so_far)
 
@@ -124,4 +117,4 @@ def valid_word(words_so_far):
            finds.append(word)
    return finds
 
-print(valid_word(words_so_far))
+print(sorted(set(valid_word(words_so_far))))
